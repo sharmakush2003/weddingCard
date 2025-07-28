@@ -85,6 +85,21 @@
         #lightbox-close { top: 40px; right: 40px; font-size: 2rem; padding: 0; background: none; }
         #lightbox-prev { left: 40px; }
         #lightbox-next { right: 40px; }
+
+        /* Custom modal animation for enhanced elegance */
+        @keyframes elegantFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        .modal-animate {
+            animation: elegantFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
     </style>
 </head>
 <body class="text-navy antialiased">
@@ -92,8 +107,27 @@
     <div id="preloader">
         <div class="loader-initials">A & A</div>
     </div>
-
-    <audio id="background-music" src="https://cdn.pixabay.com/download/audio/2022/01/21/audio_39180302a2.mp3" loop></audio>
+    
+    <div id="welcome-modal" class="fixed inset-0 bg-black/60 backdrop-blur-md z-[10001] flex justify-center items-center p-4 transition-opacity duration-700">
+        <div class="max-w-3xl w-full bg-[#FDFBF8] rounded-lg shadow-2xl flex overflow-hidden modal-animate">
+            <div class="hidden md:flex w-1/3 bg-navy p-8 flex-col justify-center items-center">
+                <div class="font-cursive text-7xl text-gold opacity-80">Ayush</div>
+                <div class="text-4xl text-gold opacity-70 my-4">&</div>
+                <div class="font-cursive text-7xl text-gold opacity-80">Ananya</div>
+            </div>
+            <div class="w-full md:w-2/3 p-8 md:p-12 text-center flex flex-col justify-center">
+                <h2 class="font-display text-4xl lg:text-5xl text-navy tracking-wide mb-4">A Union of Hearts</h2>
+                <p class="text-navy/80 leading-relaxed max-w-sm mx-auto mb-8">
+                    We joyfully invite you to share in our happiness as we, Ayush and Ananya, tie the knot. Your presence at our wedding is the most cherished gift of all.
+                </p>
+                <div class="mt-auto">
+                    <button id="enter-website-btn" class="px-10 py-3 text-lg font-semibold text-white bg-gold rounded-full hover:bg-opacity-90 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 ring-offset-[#FDFBF8] focus:ring-gold">
+                        Discover the Details
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <header id="header" class="bg-white/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 shadow-sm transition-all duration-300">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -257,13 +291,13 @@
     </main>
 
     <footer class="bg-navy text-gold">
-  <div class="container mx-auto py-12 px-6 text-center">
-    <h3 class="text-4xl font-cursive fancy-text mb-4">Ayush & Ananya</h3>
-    <p class="mb-6 font-display fancy-text">November 24 & 25, 2025 | Zirakpur</p>
-    <p class="text-sm fancy-text opacity-75 font-display">#AyushWedsAnanya</p>
-    <p class="mt-4 text-sm italic fancy-text">Lovingly crafted by Ayush's cousin brothers 💛 — with elegance, warmth, and the finest font flair.</p>
-  </div>
-</footer>
+      <div class="container mx-auto py-12 px-6 text-center">
+        <h3 class="text-4xl font-cursive fancy-text mb-4">Ayush & Ananya</h3>
+        <p class="mb-6 font-display fancy-text">November 24 & 25, 2025 | Zirakpur</p>
+        <p class="text-sm fancy-text opacity-75 font-display">#AyushWedsAnanya</p>
+        <p class="mt-4 text-sm italic fancy-text">Lovingly crafted by Ayush's cousin brothers 💛 — with elegance, warmth, and the finest font flair.</p>
+      </div>
+    </footer>
 
     <div id="lightbox">
         <button id="lightbox-close" class="lightbox-btn">×</button>
@@ -321,8 +355,24 @@
 
     <script>
         window.onload = () => {
-            // Hide preloader
+            // --- Preloader & Welcome Modal Logic ---
             document.getElementById('preloader').classList.add('hidden');
+
+            const welcomeModal = document.getElementById('welcome-modal');
+            const enterButton = document.getElementById('enter-website-btn');
+
+            if (sessionStorage.getItem('welcomeShown')) {
+                welcomeModal.style.display = 'none';
+            } else {
+                enterButton.addEventListener('click', () => {
+                    welcomeModal.classList.add('opacity-0', 'pointer-events-none');
+                    welcomeModal.addEventListener('transitionend', () => {
+                        welcomeModal.style.display = 'none';
+                    }, { once: true });
+                    
+                    sessionStorage.setItem('welcomeShown', 'true');
+                });
+            }
 
             // --- Bokeh Background Animation ---
             const canvas = document.getElementById('hero-canvas');
@@ -378,12 +428,6 @@
                 canvas.height = window.innerHeight;
                 initCircles();
             });
-
-            // --- Music Controls ---
-            const music = document.getElementById('background-music');
-            document.body.addEventListener('click', () => {
-                music.play().catch(e => console.log("Browser prevented autoplay."));
-            }, { once: true });
 
             // --- Mobile Menu Toggle ---
             const mobileMenuButton = document.getElementById('mobile-menu-button');
