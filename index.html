@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
     <style>
+
         /* Custom styles to extend Tailwind */
         body {
             font-family: 'Manrope', sans-serif;
@@ -98,20 +99,20 @@
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="text-3xl font-cursive text-navy">A & A</a>
             <nav class="hidden md:flex items-center space-x-8">
-                <a href="#story" class="nav-link text-navy hover:text-gold">Our Story</a>
+                <a href="#hero" class="nav-link text-navy hover:text-gold">Card</a>
                 <a href="#events" class="nav-link text-navy hover:text-gold">Events</a>
                 <a href="#gallery" class="nav-link text-navy hover:text-gold">Gallery</a>
-                <a href="#rsvp" class="ml-4 px-5 py-2.5 text-sm text-white bg-gold rounded-full hover:bg-opacity-90 transition-all duration-300 shadow hover:shadow-lg">RSVP</a>
+                <a href="#invitation" class="ml-4 px-5 py-2.5 text-sm text-white bg-gold rounded-full hover:bg-opacity-90 transition-all duration-300 shadow hover:shadow-lg">Invitation</a>
             </nav>
             <button id="mobile-menu-button" class="md:hidden text-navy">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
         </div>
         <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
-             <a href="#story" class="block text-navy hover:text-gold">Our Story</a>
+             <a href="#hero" class="block text-navy hover:text-gold">Card</a>
              <a href="#events" class="block text-navy hover:text-gold">Events</a>
              <a href="#gallery" class="block text-navy hover:text-gold">Gallery</a>
-             <a href="#rsvp" class="block mt-2 px-4 py-2 text-center text-white bg-gold rounded-full hover:bg-opacity-90 transition">RSVP</a>
+             <a href="#invitation" class="block mt-2 px-4 py-2 text-center text-white bg-gold rounded-full hover:bg-opacity-90 transition">Invitation</a>
         </div>
     </header>
 
@@ -226,13 +227,14 @@
     </main>
 
     <footer class="bg-navy text-gold">
-        <div class="container mx-auto py-12 px-6 text-center">
-            <h3 class="text-4xl font-cursive text-gold mb-4">Ayush & Ananya</h3>
-            <p class="mb-6">November 24 & 25, 2025 | Zirakpur</p>
-            <p class="text-sm text-gold opacity-75">#AyushWedsAnanya</p>
-        </div>
-    </footer>
-
+  <div class="container mx-auto py-12 px-6 text-center">
+    <h3 class="text-4xl font-cursive fancy-text mb-4">Ayush & Ananya</h3>
+    <p class="mb-6 font-display fancy-text">November 24 & 25, 2025 | Zirakpur</p>
+    <p class="text-sm fancy-text opacity-75 font-display">#AyushWedsAnanya</p>
+    <p class="mt-4 text-sm italic fancy-text">Lovingly crafted by Ayush's cousin brothers 💛 — with elegance, warmth, and the finest font flair.</p>
+  </div>
+</footer>
+    
     <div id="lightbox">
         <button id="lightbox-close" class="lightbox-btn">×</button>
         <button id="lightbox-prev" class="lightbox-btn">←</button>
